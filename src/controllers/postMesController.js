@@ -16,8 +16,8 @@ const saveMessage = async (req, res) => {
     try {
         connection = await getDB();
         await connection.query(
-            'INSERT INTO messages (name, email, message) VALUES (?, ?, ?)',
-            [name, email, message]
+            'INSERT INTO messages (name, email, message, createdAt) VALUES (?, ?, ?, ?)',
+            [name, email, message, new Date()]
         );
 
         const transporter = nodemailer.createTransport({
