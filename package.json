@@ -6,7 +6,8 @@
   "scripts": {
     "test": "nodemon  src/index.js",
     "dev": "nodemon src/index.js",
-    "initDB": "node ./src/DB/initDB"
+    "initDB": "node ./src/DB/initDB",
+    "build": "echo 'No build step required'"
   },
   "keywords": [],
   "author": "",
