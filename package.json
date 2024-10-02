@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "nodemon  src/index.js",
-    "dev": "nodemon src/index.js",
+    "dev": "node src/index.js",
     "initDB": "node ./src/DB/initDB",
+    "start": "node src/index.js",
     "build": "echo 'No build step required'"
   },
   "keywords": [],
