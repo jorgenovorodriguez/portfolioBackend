@@ -31,7 +31,7 @@ const saveMessage = async (req, res) => {
         });
 
         const mailOptions = {
-            from: email,
+            from: SMTP_MAIL,
             to: SMTP_MAIL,
             subject: `New message from ${email}`,
             text: `${name}: ${message}`,
