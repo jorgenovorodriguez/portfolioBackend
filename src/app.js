@@ -1,6 +1,8 @@
 const express = require('express');
 const config = require('./config');
 const cors = require('cors');
+const { initI18next } = require('./i18');
+
 const { getDataExperience } = require('./controllers/getExpController');
 const { saveMessage } = require('./controllers/postMesController');
 
@@ -8,10 +10,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Configuration
+// Inicializar i18next
+initI18next(app);
+
+// Configuración
 app.set('port', config.app.port);
 
-// Routes
+// Rutas
 app.get('/api/experience', getDataExperience);
 app.use('/api/message', saveMessage);
 

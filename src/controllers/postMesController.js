@@ -5,7 +5,6 @@ const { SMTP_HOST, SMTP_PORT, SMTP_PASS, SMTP_MAIL } = process.env;
 
 const saveMessage = async (req, res) => {
     const { name, email, message } = req.body;
-    console.log(SMTP_HOST, SMTP_PORT, SMTP_PASS, SMTP_MAIL);
 
     let connection;
 
