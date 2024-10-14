@@ -9,6 +9,7 @@ const main = async () => {
 
         await connection.query('DROP TABLE IF EXISTS history');
         await connection.query('DROP TABLE IF EXISTS messages');
+        await connection.query('DROP TABLE IF EXISTS projects');
 
         await connection.query(`
             CREATE TABLE IF NOT EXISTS history (
@@ -32,6 +33,20 @@ const main = async () => {
                 message VARCHAR(500) NOT NULL,
                 createdAt DATETIME NOT NULL DEFAULT NOW()
             )    
+        `);
+
+        await connection.query(`
+            CREATE TABLE IF NOT EXISTS projects (
+                id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                title VARCHAR(50) NOT NULL,
+                category VARCHAR(50) NOT NULL,
+                imageSrc VARCHAR(50) NOT NULL,
+                description TEXT NOT NULL,
+                skills JSON NOT NULL,
+                gitLinkFront VARCHAR(255) NOT NULL,
+                gitLinkBack VARCHAR(255),
+                createdAt DATETIME NOT NULL DEFAULT NOW()
+            )
         `);
 
         console.log('Tables created');

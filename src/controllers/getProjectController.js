@@ -2,9 +2,9 @@ const getDB = require('../DB/getDB');
 const i18next = require('i18next');
 const { setLanguage } = require('../i18');
 
-const TABLE = 'history';
+const TABLE = 'projects';
 
-const getDataExperience = async (req, res) => {
+const getDataProjects = async (req, res) => {
     let connection;
     const language = req.headers['accept-language'];
     setLanguage(language);
@@ -15,8 +15,10 @@ const getDataExperience = async (req, res) => {
 
         const translatedRows = rows.map((row) => ({
             ...row,
-            role: i18next.t(row.role, { lng: language }),
-            experiences: i18next.t(row.experiences, { lng: language }),
+            title: i18next.t(row.title, { lng: language }),
+            category: i18next.t(row.category, { lng: language }),
+            description: i18next.t(row.description, { lng: language }),
+            category: i18next.t(row.category, { lng: language }),
         }));
 
         res.status(200).json(translatedRows);
@@ -31,5 +33,5 @@ const getDataExperience = async (req, res) => {
 };
 
 module.exports = {
-    getDataExperience,
+    getDataProjects,
 };

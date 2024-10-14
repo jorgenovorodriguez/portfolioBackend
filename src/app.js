@@ -5,6 +5,7 @@ const { initI18next } = require('./i18');
 
 const { getDataExperience } = require('./controllers/getExpController');
 const { saveMessage } = require('./controllers/postMesController');
+const { getDataProjects } = require('./controllers/getProjectController');
 
 const app = express();
 app.use(cors());
@@ -18,6 +19,7 @@ app.set('port', config.app.port);
 
 // Rutas
 app.get('/api/experience', getDataExperience);
+app.get('/api/projects', getDataProjects);
 app.use('/api/message', saveMessage);
 
 module.exports = app;
