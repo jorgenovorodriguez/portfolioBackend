@@ -65,7 +65,7 @@ const saveMessage = async (req, res) => {
         const { success, score, errorCodes } = await validateCaptcha(
             captchaToken
         );
-
+        console.log('Captcha validated:', success, score);
         if (!success || score < 0.5) {
             return res.status(400).json({
                 error: true,
@@ -76,8 +76,13 @@ const saveMessage = async (req, res) => {
         }
 
         connection = await getDB();
+        console.log('Connection acquired');
+
         await saveToDatabase(connection, name, email, message);
+        console.log('Message saved to database');
+
         await sendEmail(name, email, message);
+        console.log('Email sent');
 
         return res.status(200).json({
             error: false,
@@ -85,11 +90,12 @@ const saveMessage = async (req, res) => {
             body: 'Message saved and email sent successfully!',
         });
     } catch (error) {
-        console.error('Error saving message or sending email:', error);
+        console.error('Error:', error.message);
         return res.status(500).json({
             error: true,
             status: 500,
             body: 'Error saving message or sending email.',
+            details: error.message,
         });
     } finally {
         if (connection) connection.release();
