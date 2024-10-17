@@ -3,9 +3,7 @@ const config = require('./config');
 const cors = require('cors');
 const { initI18next } = require('./i18');
 
-const { getDataExperience } = require('./controllers/getExpController');
-const { saveMessage } = require('./controllers/postMesController');
-const { getDataProjects } = require('./controllers/getProjectController');
+const routes = require('./routes');
 
 const app = express();
 app.use(cors());
@@ -18,8 +16,6 @@ initI18next(app);
 app.set('port', config.app.port);
 
 // Rutas
-app.get('/api/experience', getDataExperience);
-app.get('/api/projects', getDataProjects);
-app.use('/api/message', saveMessage);
+app.use(routes);
 
 module.exports = app;

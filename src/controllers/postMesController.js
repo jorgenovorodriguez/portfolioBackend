@@ -1,5 +1,4 @@
 const getDB = require('../DB/getDB');
-const responses = require('../network/responses');
 const nodemailer = require('nodemailer');
 const { SMTP_HOST, SMTP_PORT, SMTP_PASS, SMTP_MAIL } = process.env;
 
@@ -9,7 +8,11 @@ const saveMessage = async (req, res) => {
     let connection;
 
     if (!name || !email || !message) {
-        return responses.error(req, res, 'All fields are required', 400);
+        return res.status(400).json({
+            error: true,
+            status: 400,
+            body: 'All fields are required',
+        });
     }
 
     try {
@@ -38,20 +41,18 @@ const saveMessage = async (req, res) => {
 
         await transporter.sendMail(mailOptions);
 
-        return responses.success(
-            req,
-            res,
-            'Message saved and email sent successfully!',
-            200
-        );
+        return res.status(200).json({
+            error: false,
+            status: 200,
+            body: 'Message saved and email sent successfully!',
+        });
     } catch (error) {
         console.error('Error saving message or sending email:', error);
-        return responses.error(
-            req,
-            res,
-            'Error saving message or sending email.',
-            500
-        );
+        return res.status(500).json({
+            error: true,
+            status: 500,
+            body: 'Error saving message or sending email.',
+        });
     } finally {
         if (connection) connection.release();
     }
