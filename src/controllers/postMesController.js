@@ -11,7 +11,7 @@ const validateCaptcha = async (captchaToken) => {
             event: {
                 token: captchaToken,
                 expectedAction: 'USER_ACTION',
-                siteKey: '6Ld3i1UqAAAAABPb1rtVvoxSTqjpTP7wJSGNmTpQ',
+                siteKey: RECAPTCHA_KEY,
             },
         }
     );
